@@ -5,7 +5,7 @@ const CustomError = require("./../utils/customError");
 const asyncErrorHandler = require("./../utils/asyncErrorHandler");
 
 const signToken = (id) => {
-  return jwt.sign({ id: id }, "fgjiotcnvsee", {
+  return jwt.sign({ id: id }, process.env.jwt_key, {
     expiresIn: 1000000,
   });
 };
@@ -56,7 +56,10 @@ exports.protect = asyncErrorHandler(async (req, res, next) => {
   if (!token) {
     return next(new CustomError("your are not logged in! please login", 401));
   }
-  const decodedToken = await util.promisify(jwt.verify)(token, "fgjiotcnvsee");
+  const decodedToken = await util.promisify(jwt.verify)(
+    token,
+    process.env.jwt_key
+  );
   const user = await User.findById(decodedToken.id);
   req.user = user;
   next();
