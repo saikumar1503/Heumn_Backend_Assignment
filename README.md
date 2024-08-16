@@ -33,5 +33,5 @@ The Nalanda Library Management System is a comprehensive application that allows
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/nalanda-library-management-system.git
+   git clone https://github.com/saikumar1503/Heumn_Backend_Assignment.git
    ```
