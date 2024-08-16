@@ -11,6 +11,8 @@ const CustomError = require("./utils/customError");
 const app = express();
 app.use(express.json());
 
+app.use("/", bookRouter);
+
 app.use("/api/user", userRouter);
 app.use("/api/book", bookRouter);
 app.use("/api/borrow", borrowRouter);
