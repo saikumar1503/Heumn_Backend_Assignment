@@ -7,13 +7,13 @@ const globalErrorHandler = require("./controllers/errorController");
 const userRouter = require("./routes/userRouter");
 const bookRouter = require("./routes/bookRouter");
 const borrowRouter = require("./routes/borrowRouter");
+const CustomError = require("./utils/customError");
 const app = express();
 app.use(express.json());
 
 app.use("/api/user", userRouter);
 app.use("/api/book", bookRouter);
 app.use("/api/borrow", borrowRouter);
-app.use(globalErrorHandler);
 
 app.all("*", (req, res, next) => {
   const err = new CustomError(
@@ -22,6 +22,8 @@ app.all("*", (req, res, next) => {
   );
   next(err);
 });
+
+app.use(globalErrorHandler);
 
 mongoose
   .connect(process.env.mongodb_url)
